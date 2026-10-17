@@ -1,12 +1,12 @@
 # Dashboard Looker Studio: TaskFlow / Progreso de trabajo
 
-Estado: material listo; el reporte externo aún no está creado. URL: pendiente de publicar por el equipo.
+Reporte real: https://datastudio.google.com/u/1/reporting/281c1997-00c3-4873-bb45-5c6b59fbeb8d/page/SKVBG . Lectura para cualquier persona con el enlace autorizada por el autor. Tres KPIs y gráficos verificados; filtros comprobados. Evidencia y límites: [CLOUD.md](../docs/CLOUD.md).
 Se usa un dataset derivado, permitido expresamente por el PDF. Evita exponer la base Postgres o una clave de servicio a Looker.
 
 ## Crear el reporte
 1. Ejecuta la aplicación, entra con la cuenta que aporta el dataset, limpia filtros y pulsa Exportar CSV. Para presentación sin Supabase usa sample.csv (datos sintéticos, snapshot 2026-10-17).
-2. Importa el CSV a Google Sheets en una hoja llamada tasks. Configura zona horaria America/Bogota, primera fila como cabecera y tipos según la tabla inferior. No incluir nombres sensibles de proyectos en reportes públicos.
-3. En Looker Studio crea un reporte vacío; añade fuente Google Sheets y selecciona esa hoja. Configura las credenciales de la fuente conforme al público autorizado. Verifica acceso con otra cuenta del docente.
+2. En esta entrega se subió sample.csv directamente mediante el conector CSV de Looker, como fuente TaskFlowTareas. No se necesita Google Sheets. Una alternativa es importar a Sheets y conectarlo, manteniendo el mismo esquema. No incluir nombres sensibles de proyectos en reportes públicos.
+3. En un reporte nuevo añade esa fuente. Para fechas de texto crea Fecha de creación con `PARSE_DATE("%Y-%m-%d", created_date)` y úsala como dimensión de periodo de todos los gráficos y tarjetas. Configura las credenciales de la fuente conforme al público autorizado. Verifica acceso con otra cuenta del docente.
 4. Añade tres tarjetas: total de tareas, tasa de finalización y tareas vencidas. Todos los componentes usan la misma fuente, el mismo intervalo y los mismos filtros.
 5. Añade serie temporal por created_date con COUNT_DISTINCT(task_id); barras por project con COUNT_DISTINCT(task_id); gráfico circular por status con COUNT_DISTINCT(task_id).
 6. Añade control de intervalo (dimensión created_date), listas desplegables project, status y priority. Título visible: "Tareas por fecha de creación". La tasa representa la cohorte de tareas creadas en ese período, no entregas ocurridas en él.
@@ -19,7 +19,7 @@ Se usa un dataset derivado, permitido expresamente por el PDF. Evita exponer la 
 | Tasa de finalización | SUM(is_completed) / COUNT_DISTINCT(task_id) | porcentaje; sin datos mostrar 0 o sin datos |
 | Tareas vencidas al exportar | SUM(is_overdue) | entero |
 
-No combinar el dataset con tablas que dupliquen tareas. `is_overdue` es un snapshot: reexportar diariamente y reemplazar filas de Sheets, sin anexarlas. Una actualización de Looker no vuelve a consultar Supabase automáticamente en esta ruta manual.
+No combinar el dataset con tablas que dupliquen tareas. El reporte utiliza Record Count en los recuentos, equivalente a COUNT_DISTINCT(task_id) en esta muestra de identificadores únicos. `is_overdue` es un snapshot: reexportar y reemplazar la muestra, sin anexar duplicados; en Sheets reemplazar las filas. Una actualización de Looker no vuelve a consultar Supabase automáticamente en esta ruta manual.
 
 ## Diccionario de la fuente
 | Campo | Tipo | Uso |
