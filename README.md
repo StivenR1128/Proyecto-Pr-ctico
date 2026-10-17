@@ -15,7 +15,7 @@ npm run dev
 Abre la dirección que imprime Vite, normalmente http://127.0.0.1:5173. Sin .env se usa demo. Puedes crear proyectos/tareas, editar tareas, cambiar estado, eliminar, buscar, filtrar, ver analítica y exportar CSV. Los datos demo son sintéticos y permanecen únicamente en este navegador. Borrar la clave localStorage taskflow-demo-v1 restablece la muestra. No se migra demo a la nube.
 
 ## Activar Supabase real
-1. Crea un proyecto Supabase y espera a que esté disponible. En SQL Editor ejecuta una sola vez `supabase/migrations/001_initial.sql`. No repetir sobre una instalación existente; cambios posteriores necesitan nueva migración.
+1. El proyecto TaskFlow de esta entrega ya está configurado (ver docs/CLOUD.md). Para una instalación nueva, crea un proyecto Supabase y espera a que esté disponible. En SQL Editor ejecuta una sola vez `supabase/migrations/001_initial.sql`. No repetir sobre una instalación existente; cambios posteriores necesitan nueva migración.
 2. Copia `.env.example` a `.env` (`Copy-Item .env.example .env` en PowerShell, `cp .env.example .env` en macOS/Linux).
 3. Pon VITE_DATA_MODE=supabase, VITE_SUPABASE_URL con la URL de tu proyecto y VITE_SUPABASE_PUBLISHABLE_KEY con la clave pública publishable o anon heredada. Nunca uses service_role ni claves secretas en variables VITE: se incorporan al navegador.
 4. En Authentication → URL Configuration configura Site URL y redirecciones permitidas para http://127.0.0.1:5173 y la URL real de producción. Si usas localhost, autoriza también ese origen. En Providers habilita Email/password. Mantén confirmación de correo y configura SMTP propio para una entrega confiable si el servicio limita envíos.
@@ -72,7 +72,7 @@ Tres KPIs, gráficos temporal/comparativo/distribución y filtros: [analytics/RE
 Guion y requisitos de entrega: [docs/PRESENTATION.md](docs/PRESENTATION.md).
 
 **Repositorio GitHub:** https://github.com/StivenR1128/Proyecto-Pr-ctico — compartir acceso con el docente si es privado.
-**Dashboard Looker Studio:** pendiente de crear/publicar siguiendo analytics/README.md y pegar aquí el enlace con permisos de lectura.
+**Dashboard Looker Studio:** https://datastudio.google.com/u/1/reporting/281c1997-00c3-4873-bb45-5c6b59fbeb8d/page/SKVBG — reporte real en preparación; gráficos y acceso del docente pendientes. [Estado cloud verificado](docs/CLOUD.md).
 El repositorio indicado es real. Falta publicar el reporte de Looker y entregar ambos enlaces con acceso al docente en Classroom. El historial de colaboración y las revisiones deben corresponder a trabajo real del equipo.
 
 ## Referencias técnicas
@@ -83,3 +83,4 @@ El repositorio indicado es real. Falta publicar el reporte de Looker y entregar 
 - https://tailwindcss.com/docs/installation/using-vite
 
 No subir .env, contraseñas, tokens, node_modules ni datos privados. package-lock.json fija las versiones instaladas para npm ci.
+

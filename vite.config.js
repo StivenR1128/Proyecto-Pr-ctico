@@ -3,5 +3,5 @@ import react from "@vitejs/plugin-react";
 import tailwind from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [react(), tailwind()],
-  test: { environment: "jsdom", globals: true },
+  test: { environment: "jsdom", globals: true, env: { VITE_DATA_MODE: "demo" } },
 });

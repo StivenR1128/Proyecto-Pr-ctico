@@ -8,9 +8,10 @@ Entorno: Windows, Node v24.19.0, npm 11.17.0.
 - Servidor Vite: inicia en http://127.0.0.1:5173.
 - Revisión visual en navegador: tablero y analítica abiertos y capturados correctamente. Se resolvió el aislamiento del servidor local usando la ejecución autorizada fuera del sandbox. Capturas reales en docs/images/.
 - PostgreSQL local (PGlite 0.5.10): migración ejecutada y 31 comprobaciones aprobadas de RLS, catálogos, claves, timestamps, vista y cascada. Identidad simulada; no acredita JWT cloud.
-- Supabase remoto / registro / correo / JWT / RLS: NO ejecutados contra servicio externo porque no se proporcionaron credenciales. Migración y script test:rls entregados para validación con dos cuentas.
+- Supabase remoto: migración aplicada, RLS verificado en las cinco tablas, 5 comprobaciones reales de acceso anónimo/JWT aprobadas. Cuenta institucional registrada, correo confirmado y primer inicio de sesión observados en Auth. CRUD autenticado y aislamiento entre dos sesiones cloud pendientes; ver CLOUD.md.
 - OpenCode 1.19.3: instalado con versión fija; CLI y descubrimiento de agentes/skills ejecutados correctamente. Revisión real del agente qa con skill taskflow-quality y modelo gratuito ejecutada; ver OPENCODE_QA.md.
-- Looker Studio: dataset de ejemplo y configuración entregados; reporte no creado ni publicado.
+- Looker Studio: reporte real creado con CSV sintético y 3 KPIs visibles. Componentes de gráficos añadidos pero no se renderizan; filtros y permisos del docente pendientes. Ver CLOUD.md.
 - GitHub: CI, GitFlow y plantilla PR incluidos; carga inicial del proyecto en https://github.com/StivenR1128/Proyecto-Pr-ctico; historial colaborativo, PRs y revisiones reales pendientes.
 
 El PDF original se conserva en docs/Proyecto Practico.pdf para trazabilidad.
+

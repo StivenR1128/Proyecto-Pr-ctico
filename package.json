@@ -14,6 +14,7 @@
     "test:watch": "vitest",
     "test:rls": "node --env-file=.env scripts/test-rls.mjs",
     "test:database": "node scripts/test-database.mjs",
+    "test:cloud": "node --env-file=.env scripts/test-cloud-anonymous.mjs",
     "opencode": "node scripts/opencode.mjs",
     "format": "prettier --write src tests scripts vite.config.js opencode.json package.json"
   },
