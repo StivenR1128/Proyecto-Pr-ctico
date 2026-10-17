@@ -14,10 +14,10 @@
 | Agentes especializados y skills | .opencode y opencode.json | CLI, agentes y sesión QA con skill verificados; docs/OPENCODE_QA.md |
 | Entorno homogéneo | .env.example, lockfile, README, TEAM | Node 24.19.0 y OpenCode 1.19.3 fijados; modelo gratuito probado |
 | MCP si procede | Justificación de no usarlo | Ninguna |
-| Supabase normalizado, FK, índices | Migración y ER | Crear proyecto y aplicar SQL |
-| Registro/login JWT y recursos protegidos | SDK Auth, RLS y test externo | Configurar Auth y probar dos cuentas |
-| Looker: 3 KPIs, gráficos, filtros | CSV y receta reproducible | Crear, validar y compartir reporte |
-| GitHub y GitFlow con revisión | Guía, CI, plantilla PR | Código publicado; completar PRs/revisión real y protecciones |
+| Supabase normalizado, FK, índices | Migración y ER, aplicados en cloud | Ninguna para la instalación actual; no repetir migración |
+| Registro/login JWT y recursos protegidos | Registro/correo/login observados, 31 checks SQL y 5 cloud | Probar CRUD autenticado y dos identidades cloud |
+| Looker: 3 KPIs, gráficos, filtros | Reporte real y captura Chrome; filtros comprobados | Abrir enlace desde cuenta docente y entregar en Classroom |
+| GitHub y GitFlow con revisión | PRs, CI y protecciones reales | Trabajo individual; no hay revisión humana de otro integrante |
 | Entrega Classroom | README completo | Adjuntar URLs reales con permisos |
 
-No presentar este paquete como evidencia de trabajo colaborativo previo ni como dashboard ya publicado.
+No presentar este paquete como evidencia de trabajo colaborativo previo. El dashboard está compartido con datos sintéticos; la sesión privada del autor no se incluye en los archivos.
