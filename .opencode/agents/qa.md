@@ -1,6 +1,6 @@
 ---
 description: Verifica flujos críticos, seguridad y regresiones.
-mode: subagent
+mode: all
 ---
 Carga la skill `taskflow-quality` antes de modificar el proyecto.
 

@@ -1,6 +1,6 @@
 ---
 description: Implementa Supabase Auth, SQL y seguridad de datos.
-mode: subagent
+mode: all
 ---
 Carga la skill `taskflow-supabase` antes de modificar el proyecto.
 

@@ -4,8 +4,10 @@ Gestor de proyectos y tareas para estudiantes y equipos pequeños que necesitan 
 
 **Entrega basada en Proyecto Práctico.pdf.** React + Vite + Tailwind CSS, Supabase Auth (JWT) y PostgreSQL. Incluye modo demo persistente en el navegador para presentar sin credenciales.
 
+![Tablero de TaskFlow](docs/images/tablero.jpg)
+
 ## Inicio rápido (demostración)
-Requiere Node.js >=22.12 y npm. Desde la carpeta taskflow:
+Entorno verificado: Node.js 24.19.0 (fijado en .nvmrc y .node-version) y npm; mínimo compatible Node.js >=22.12. Desde la carpeta taskflow:
 ```sh
 npm ci
 npm run dev
@@ -25,14 +27,15 @@ La aplicación incluye registro, inicio y cierre de sesión; no incluye recupera
 ## Verificación y build
 ```sh
 npm test
+npm run test:database
 npm run build
 npm run preview
 ```
-Pruebas de reglas, KPIs, CSV y flujo de interfaz. Para verificar RLS contra TU Supabase: crea dos cuentas confirmadas, completa las variables TEST_* en .env y ejecuta:
+Pruebas de reglas, KPIs, CSV y flujo de interfaz. `npm run test:database` ejecuta la migración completa en PostgreSQL local mediante PGlite y verifica 31 condiciones de RLS, claves foráneas, triggers y borrado en cascada. Solo se simula la identidad auth.uid(): no prueba la emisión ni validación de JWT, los correos ni la API de Supabase cloud. Para verificar RLS contra TU Supabase: crea dos cuentas confirmadas, completa las variables TEST_* en .env y ejecuta:
 ```sh
 node --env-file=.env scripts/test-rls.mjs
 ```
-La prueba crea proyectos temporales, comprueba aislamiento y los elimina al terminar. No requiere service_role. El resultado local de esta entrega está en docs/VALIDATION.md. CI ejecuta tests y build en PRs y main/develop.
+La prueba crea proyectos temporales, comprueba aislamiento y los elimina al terminar. No requiere service_role. El resultado local de esta entrega está en docs/VALIDATION.md. CI ejecuta tests de interfaz, PostgreSQL/RLS y build en PRs y main/develop. La activación efectiva y el resultado remoto se registran por separado.
 El build dist puede alojarse en un servicio estático; configura variables de entorno al construir, HTTPS en producción y redirecciones de Auth. Este paquete no está publicado.
 
 ## Estructura
@@ -40,7 +43,7 @@ El build dist puede alojarse en un servicio estático; configura variables de en
 src/                         interfaz, repositorio demo/Supabase y reglas
 supabase/migrations/         modelo, índices, triggers, RLS y vista analítica
 tests/                       reglas y flujo de UI
-scripts/test-rls.mjs          prueba de aislamiento con dos cuentas reales
+scripts/                     pruebas PostgreSQL/RLS, Supabase cloud y lanzador OpenCode
 .opencode/agents/            arquitecto, frontend, backend, QA y analítica
 .opencode/skills/            cinco skills locales del proyecto
 analytics/                   dataset ejemplo y receta de Looker Studio
@@ -49,7 +52,7 @@ docs/                        arquitectura, GitFlow, presentación y validación
 ```
 
 ## OpenCode: entorno homogéneo
-Instala OpenCode siguiendo https://opencode.ai/docs/ y autentica el proveedor de modelos autorizado del equipo. Ejecuta `opencode --version`, acuerda una versión y registra el resultado real en docs/TEAM.md; todos deben instalar esa misma versión. Abre `opencode` desde la raíz del repositorio. La configuración compartida está en opencode.json, las instrucciones en AGENTS.md; agentes y skills se descubren desde .opencode. No hay instalación global de skills necesaria: se versionan localmente.
+OpenCode 1.19.3 está fijado en las dependencias y el lockfile. `npm ci` instala exactamente esa versión. Ejecuta `npm run opencode -- --version`, `npm run opencode -- agent list` y `npm run opencode` desde la raíz. [Guía y evidencia de instalación](docs/OPENCODE.md). La configuración compartida está en opencode.json, las instrucciones en AGENTS.md y los agentes/skills en .opencode. Las credenciales personales de modelo y logs quedan en .local/opencode, ignorado por Git.
 
 | Agente | Skill | Responsabilidad |
 |---|---|---|
@@ -59,7 +62,7 @@ Instala OpenCode siguiendo https://opencode.ai/docs/ y autentica el proveedor de
 | qa | taskflow-quality | tests y verificación externa |
 | analytics | taskflow-analytics | KPIs y dashboard |
 
-En OpenCode usa @architect, @frontend, @backend, @qa o @analytics con una tarea acotada. Cada agente carga su skill. Propuesta de sesión: @backend revisa la relación proyecto/propietario y ejecuta la prueba RLS con cuentas de prueba. Guarda evidencia real en docs/TEAM.md. No se afirma que OpenCode se haya ejecutado en esta entrega.
+En OpenCode usa @architect, @frontend, @backend, @qa o @analytics con una tarea acotada. Cada agente carga su skill. Propuesta de sesión: @backend revisa la relación proyecto/propietario y ejecuta la prueba RLS con cuentas de prueba. Guarda evidencia real en docs/TEAM.md. Se ejecutaron la CLI y el descubrimiento de agentes; se ejecutó una revisión real del agente qa con el modelo gratuito opencode/glm-5.3-flash-free y su skill; ver [evidencia](docs/OPENCODE_QA.md).
 MCP es opcional según el PDF y no se configura: SQL Editor, SDK y archivos versionados cubren el flujo sin acceso adicional. Si se añade un MCP de Supabase, usar proyecto de desarrollo, OAuth/permisos mínimos y registrar su justificación, sin tokens en Git.
 
 ## Datos, GitFlow y dashboard

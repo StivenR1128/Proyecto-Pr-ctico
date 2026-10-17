@@ -1,6 +1,6 @@
 ---
 description: Diseña el modelo relacional y decisiones de TaskFlow.
-mode: subagent
+mode: all
 ---
 Carga la skill `taskflow-architecture` antes de modificar el proyecto.
 

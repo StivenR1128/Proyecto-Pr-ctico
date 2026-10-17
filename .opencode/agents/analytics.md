@@ -1,6 +1,6 @@
 ---
 description: Define y valida métricas para Looker Studio.
-mode: subagent
+mode: all
 ---
 Carga la skill `taskflow-analytics` antes de modificar el proyecto.
 

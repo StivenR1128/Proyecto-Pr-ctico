@@ -11,13 +11,13 @@
 ## Correspondencia con PDF
 | Requisito | Evidencia entregada | Acción externa pendiente |
 |---|---|---|
-| Agentes especializados y skills | .opencode y opencode.json | Instalar/autenticar OpenCode, ejecutar y capturar |
-| Entorno homogéneo | .env.example, lockfile, README, TEAM | Acordar versión exacta OpenCode/modelo |
+| Agentes especializados y skills | .opencode y opencode.json | CLI, agentes y sesión QA con skill verificados; docs/OPENCODE_QA.md |
+| Entorno homogéneo | .env.example, lockfile, README, TEAM | Node 24.19.0 y OpenCode 1.19.3 fijados; modelo gratuito probado |
 | MCP si procede | Justificación de no usarlo | Ninguna |
 | Supabase normalizado, FK, índices | Migración y ER | Crear proyecto y aplicar SQL |
 | Registro/login JWT y recursos protegidos | SDK Auth, RLS y test externo | Configurar Auth y probar dos cuentas |
 | Looker: 3 KPIs, gráficos, filtros | CSV y receta reproducible | Crear, validar y compartir reporte |
-| GitHub y GitFlow con revisión | Guía, CI, plantilla PR | Publicar e implementar historial real |
+| GitHub y GitFlow con revisión | Guía, CI, plantilla PR | Código publicado; completar PRs/revisión real y protecciones |
 | Entrega Classroom | README completo | Adjuntar URLs reales con permisos |
 
 No presentar este paquete como evidencia de trabajo colaborativo previo ni como dashboard ya publicado.
