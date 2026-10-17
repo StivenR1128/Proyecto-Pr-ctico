@@ -1,0 +1,82 @@
+# TaskFlow
+
+Gestor de proyectos y tareas para estudiantes y equipos pequeños que necesitan visualizar sus prioridades. Cada cuenta dispone de un espacio personal privado; el equipo de desarrollo trabaja sobre el repositorio con GitFlow.
+
+**Entrega basada en Proyecto Práctico.pdf.** React + Vite + Tailwind CSS, Supabase Auth (JWT) y PostgreSQL. Incluye modo demo persistente en el navegador para presentar sin credenciales.
+
+## Inicio rápido (demostración)
+Requiere Node.js >=22.12 y npm. Desde la carpeta taskflow:
+```sh
+npm ci
+npm run dev
+```
+Abre la dirección que imprime Vite, normalmente http://127.0.0.1:5173. Sin .env se usa demo. Puedes crear proyectos/tareas, editar tareas, cambiar estado, eliminar, buscar, filtrar, ver analítica y exportar CSV. Los datos demo son sintéticos y permanecen únicamente en este navegador. Borrar la clave localStorage taskflow-demo-v1 restablece la muestra. No se migra demo a la nube.
+
+## Activar Supabase real
+1. Crea un proyecto Supabase y espera a que esté disponible. En SQL Editor ejecuta una sola vez `supabase/migrations/001_initial.sql`. No repetir sobre una instalación existente; cambios posteriores necesitan nueva migración.
+2. Copia `.env.example` a `.env` (`Copy-Item .env.example .env` en PowerShell, `cp .env.example .env` en macOS/Linux).
+3. Pon VITE_DATA_MODE=supabase, VITE_SUPABASE_URL con la URL de tu proyecto y VITE_SUPABASE_PUBLISHABLE_KEY con la clave pública publishable o anon heredada. Nunca uses service_role ni claves secretas en variables VITE: se incorporan al navegador.
+4. En Authentication → URL Configuration configura Site URL y redirecciones permitidas para http://127.0.0.1:5173 y la URL real de producción. Si usas localhost, autoriza también ese origen. En Providers habilita Email/password. Mantén confirmación de correo y configura SMTP propio para una entrega confiable si el servicio limita envíos.
+5. Reinicia `npm run dev`. Regístrate con correo real, confirma el correo e inicia sesión. Una cuenta nueva empieza sin proyectos: crea uno y después sus tareas. El trigger crea su perfil.
+6. Prueba con dos cuentas: ninguna debe ver tareas de la otra. El SDK envía JWT y Supabase valida cada acceso; RLS verifica el propietario del proyecto en cada operación y evita referencias a proyectos ajenos. No existe un backend propio que requiera otra clave.
+
+La aplicación incluye registro, inicio y cierre de sesión; no incluye recuperación de contraseña, invitaciones ni colaboración sobre un proyecto. Se recomienda usar cuentas de demostración sin información sensible al presentar.
+
+## Verificación y build
+```sh
+npm test
+npm run build
+npm run preview
+```
+Pruebas de reglas, KPIs, CSV y flujo de interfaz. Para verificar RLS contra TU Supabase: crea dos cuentas confirmadas, completa las variables TEST_* en .env y ejecuta:
+```sh
+node --env-file=.env scripts/test-rls.mjs
+```
+La prueba crea proyectos temporales, comprueba aislamiento y los elimina al terminar. No requiere service_role. El resultado local de esta entrega está en docs/VALIDATION.md. CI ejecuta tests y build en PRs y main/develop.
+El build dist puede alojarse en un servicio estático; configura variables de entorno al construir, HTTPS en producción y redirecciones de Auth. Este paquete no está publicado.
+
+## Estructura
+```text
+src/                         interfaz, repositorio demo/Supabase y reglas
+supabase/migrations/         modelo, índices, triggers, RLS y vista analítica
+tests/                       reglas y flujo de UI
+scripts/test-rls.mjs          prueba de aislamiento con dos cuentas reales
+.opencode/agents/            arquitecto, frontend, backend, QA y analítica
+.opencode/skills/            cinco skills locales del proyecto
+analytics/                   dataset ejemplo y receta de Looker Studio
+docs/                        arquitectura, GitFlow, presentación y validación
+.github/                     CI y plantilla de PR
+```
+
+## OpenCode: entorno homogéneo
+Instala OpenCode siguiendo https://opencode.ai/docs/ y autentica el proveedor de modelos autorizado del equipo. Ejecuta `opencode --version`, acuerda una versión y registra el resultado real en docs/TEAM.md; todos deben instalar esa misma versión. Abre `opencode` desde la raíz del repositorio. La configuración compartida está en opencode.json, las instrucciones en AGENTS.md; agentes y skills se descubren desde .opencode. No hay instalación global de skills necesaria: se versionan localmente.
+
+| Agente | Skill | Responsabilidad |
+|---|---|---|
+| architect | taskflow-architecture | decisiones y modelo ER |
+| frontend | taskflow-frontend | React, Tailwind y accesibilidad |
+| backend | taskflow-supabase | JWT, SQL, índices y RLS |
+| qa | taskflow-quality | tests y verificación externa |
+| analytics | taskflow-analytics | KPIs y dashboard |
+
+En OpenCode usa @architect, @frontend, @backend, @qa o @analytics con una tarea acotada. Cada agente carga su skill. Propuesta de sesión: @backend revisa la relación proyecto/propietario y ejecuta la prueba RLS con cuentas de prueba. Guarda evidencia real en docs/TEAM.md. No se afirma que OpenCode se haya ejecutado en esta entrega.
+MCP es opcional según el PDF y no se configura: SQL Editor, SDK y archivos versionados cubren el flujo sin acceso adicional. Si se añade un MCP de Supabase, usar proyecto de desarrollo, OAuth/permisos mínimos y registrar su justificación, sin tokens en Git.
+
+## Datos, GitFlow y dashboard
+Modelo ER, diccionario y seguridad: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+Ramas main, develop, feature/*, release/* y hotfix/*, PRs y revisiones: [docs/GITFLOW.md](docs/GITFLOW.md).
+Tres KPIs, gráficos temporal/comparativo/distribución y filtros: [analytics/README.md](analytics/README.md).
+Guion y requisitos de entrega: [docs/PRESENTATION.md](docs/PRESENTATION.md).
+
+**Repositorio GitHub:** https://github.com/StivenR1128/Proyecto-Pr-ctico — compartir acceso con el docente si es privado.
+**Dashboard Looker Studio:** pendiente de crear/publicar siguiendo analytics/README.md y pegar aquí el enlace con permisos de lectura.
+El repositorio indicado es real. Falta publicar el reporte de Looker y entregar ambos enlaces con acceso al docente en Classroom. El historial de colaboración y las revisiones deben corresponder a trabajo real del equipo.
+
+## Referencias técnicas
+- https://supabase.com/docs/guides/database/postgres/row-level-security
+- https://supabase.com/docs/guides/database/views
+- https://opencode.ai/docs/agents/
+- https://opencode.ai/docs/skills/
+- https://tailwindcss.com/docs/installation/using-vite
+
+No subir .env, contraseñas, tokens, node_modules ni datos privados. package-lock.json fija las versiones instaladas para npm ci.
