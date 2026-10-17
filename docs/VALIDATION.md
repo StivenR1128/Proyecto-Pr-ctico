@@ -10,8 +10,10 @@ Entorno: Windows, Node v24.19.0, npm 11.17.0.
 - PostgreSQL local (PGlite 0.5.10): migración ejecutada y 31 comprobaciones aprobadas de RLS, catálogos, claves, timestamps, vista y cascada. Identidad simulada; no acredita JWT cloud.
 - Supabase remoto: migración aplicada, RLS verificado en las cinco tablas, 5 comprobaciones reales de acceso anónimo/JWT aprobadas. Cuenta institucional registrada, correo confirmado y primer inicio de sesión observados en Auth. CRUD autenticado y aislamiento entre dos sesiones cloud pendientes; ver CLOUD.md.
 - OpenCode 1.19.3: instalado con versión fija; CLI y descubrimiento de agentes/skills ejecutados correctamente. Revisión real del agente qa con skill taskflow-quality y modelo gratuito ejecutada; ver OPENCODE_QA.md.
-- Looker Studio: reporte real creado con CSV sintético y 3 KPIs visibles. Componentes de gráficos añadidos pero no se renderizan; filtros y permisos del docente pendientes. Ver CLOUD.md.
+- Looker Studio: reporte real creado con CSV sintético y 3 KPIs visibles. Tres gráficos verificados por el autor en Chrome (captura incluida), filtros de proyecto/estado/fecha comprobados. Lectura mediante enlace autorizada y habilitada. Ver CLOUD.md.
 - GitHub: CI, GitFlow y plantilla PR incluidos; carga inicial del proyecto en https://github.com/StivenR1128/Proyecto-Pr-ctico; historial colaborativo, PRs y revisiones reales pendientes.
 
 El PDF original se conserva en docs/Proyecto Practico.pdf para trazabilidad.
+
+
 

@@ -72,7 +72,7 @@ Tres KPIs, gráficos temporal/comparativo/distribución y filtros: [analytics/RE
 Guion y requisitos de entrega: [docs/PRESENTATION.md](docs/PRESENTATION.md).
 
 **Repositorio GitHub:** https://github.com/StivenR1128/Proyecto-Pr-ctico — compartir acceso con el docente si es privado.
-**Dashboard Looker Studio:** https://datastudio.google.com/u/1/reporting/281c1997-00c3-4873-bb45-5c6b59fbeb8d/page/SKVBG — reporte real en preparación; gráficos y acceso del docente pendientes. [Estado cloud verificado](docs/CLOUD.md).
+**Dashboard Looker Studio:** https://datastudio.google.com/u/1/reporting/281c1997-00c3-4873-bb45-5c6b59fbeb8d/page/SKVBG — reporte real con gráficos verificados en Chrome y filtros comprobados; lectura mediante enlace autorizada y habilitada. [Estado cloud verificado](docs/CLOUD.md).
 El repositorio indicado es real. Falta publicar el reporte de Looker y entregar ambos enlaces con acceso al docente en Classroom. El historial de colaboración y las revisiones deben corresponder a trabajo real del equipo.
 
 ## Referencias técnicas
@@ -83,4 +83,6 @@ El repositorio indicado es real. Falta publicar el reporte de Looker y entregar 
 - https://tailwindcss.com/docs/installation/using-vite
 
 No subir .env, contraseñas, tokens, node_modules ni datos privados. package-lock.json fija las versiones instaladas para npm ci.
+
+
 

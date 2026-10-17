@@ -20,4 +20,16 @@ https://datastudio.google.com/u/1/reporting/281c1997-00c3-4873-bb45-5c6b59fbeb8d
 
 Fuente CSV sintética `analytics/sample.csv`, de 12 tareas; no es una conexión automática a Supabase. KPIs observados: 12 tareas, 41,67 % finalizadas y 3 vencidas. Se añadieron controles por proyecto, estado y periodo y componentes de serie temporal, barras y distribución por estado.
 
-**Pendiente:** los tres gráficos no se renderizan en el navegador de verificación. No se considera el dashboard terminado ni se ha verificado acceso del docente. Resolver el renderizado, validar los filtros y configurar permisos de lectura antes de entregarlo en Classroom. La receta y las fórmulas están en `analytics/README.md`.
+El autor verificó los tres gráficos en Chrome y aportó la captura `docs/images/looker-verificado-chrome.png`. El navegador automatizado no renderiza esos marcos, aunque sí permite comprobar los KPIs y controles. Se amplió el lienzo a 1200 × 1100 para evitar recortar los gráficos inferiores.
+
+Filtros comprobados contra la muestra:
+
+| Selección | Tareas | Finalización | Vencidas |
+|---|---:|---:|---:|
+| Todas | 12 | 41,67 % | 3 |
+| Proyecto Sitio web | 6 | 50 % | 1 |
+| Estado done | 5 | 100 % | 0 |
+| Creación del 1 al 6 de octubre de 2026 | 6 | 83,33 % | 1 |
+
+Se restablecieron todos los filtros. El autor autorizó acceso de lectura para cualquier persona con el enlace y se guardó esa configuración (Oculto / Lector). Entregar el enlace en Classroom; no se ha realizado esa entrega ni una apertura desde la cuenta del docente. La receta y las fórmulas están en `analytics/README.md`.
+
