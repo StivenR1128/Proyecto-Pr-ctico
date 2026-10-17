@@ -66,6 +66,26 @@ En OpenCode usa @architect, @frontend, @backend, @qa o @analytics con una tarea 
 MCP es opcional según el PDF y no se configura: SQL Editor, SDK y archivos versionados cubren el flujo sin acceso adicional. Si se añade un MCP de Supabase, usar proyecto de desarrollo, OAuth/permisos mínimos y registrar su justificación, sin tokens en Git.
 
 ## Datos, GitFlow y dashboard
+Modalidad individual autorizada por el profesor, según confirmación del estudiante. [Correspondencia completa con los requisitos y evidencia](docs/CUMPLIMIENTO.md). [Enlaces preparados para Classroom](ENTREGA.md).
+
+```mermaid
+erDiagram
+  AUTH_USERS ||--|| PROFILES : identidad
+  PROFILES ||--o{ PROJECTS : propietario
+  PROJECTS ||--o{ TASKS : contiene
+  TASK_STATUSES ||--o{ TASKS : estado
+  PRIORITIES ||--o{ TASKS : prioridad
+```
+
+| Tabla | Claves y campos principales | Propósito |
+|---|---|---|
+| profiles | id UUID PK/FK auth.users, display_name, created_at | Perfil privado creado al registrarse |
+| projects | id UUID PK, owner_id FK profiles, name, description, created_at | Proyecto de una cuenta |
+| tasks | id UUID PK, project_id FK projects, title, description, status FK, priority FK, due_date, created_at, updated_at, completed_at | Tarea; propietario derivado del proyecto |
+| task_statuses | id TEXT PK, label UNIQUE | Catálogo de estados |
+| priorities | id TEXT PK, label UNIQUE | Catálogo de prioridades |
+| task_analytics | Vista security_invoker | Dataset analítico que conserva RLS |
+
 Modelo ER, diccionario y seguridad: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 Ramas main, develop, feature/*, release/* y hotfix/*, PRs y revisiones: [docs/GITFLOW.md](docs/GITFLOW.md).
 Tres KPIs, gráficos temporal/comparativo/distribución y filtros: [analytics/README.md](analytics/README.md).
