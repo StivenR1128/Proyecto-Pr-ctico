@@ -15,6 +15,8 @@ Entorno: Windows, Node v24.19.0, npm 11.17.0.
 
 El PDF original se conserva en docs/Proyecto Practico.pdf para trazabilidad.
 
+Ampliación del 17 de octubre de 2026: 10 comprobaciones adicionales de PostgreSQL cloud aprobadas con `scripts/test-cloud-sql.sql`, mediante rol authenticated e identidades SQL simuladas dentro de una transacción revertida. Esta prueba acredita CRUD/RLS en la base cloud; no emite JWT ni prueba dos sesiones REST reales. La matriz completa está en CUMPLIMIENTO.md.
+
 
 
 
