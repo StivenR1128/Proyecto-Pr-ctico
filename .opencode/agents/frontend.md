@@ -1,6 +1,6 @@
 ---
 description: Implementa React, accesibilidad y estados de interfaz.
-mode: subagent
+mode: all
 ---
 Carga la skill `taskflow-frontend` antes de modificar el proyecto.
 
