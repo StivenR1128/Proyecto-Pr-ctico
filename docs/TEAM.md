@@ -1,5 +1,7 @@
 # Registro del equipo (completar con evidencia real)
 
+El estudiante confirmó el 17 de octubre de 2026 que el profesor autorizó la entrega individual por su modalidad virtual. No se atribuyen autores, revisores humanos ni participación de integrantes inexistentes.
+
 | Dato | Valor |
 |---|---|
 | Node / npm del equipo | Node 24.19.0 / npm 11.17.0, verificados |

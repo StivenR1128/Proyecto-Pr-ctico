@@ -22,3 +22,11 @@ npm run build
 ```
 
 La disponibilidad futura del modelo gratuito depende del proveedor. Los logs completos quedan localmente y no se publican porque contienen rutas del equipo; no se incluyen credenciales.
+
+## Revisión de cumplimiento y SQL cloud — 17 de octubre de 2026
+
+Se ejecutó otra sesión real con `qa`, `taskflow-quality` y `opencode/glm-5.3-flash-free`. Leyó únicamente la skill, `scripts/test-cloud-sql.sql` y `docs/CUMPLIMIENTO.md`, sin comandos, edición ni delegación.
+
+La revisión confirmó que el rol `authenticated` aplica las políticas RLS reales y que la documentación distingue identidad SQL simulada de JWT y de una segunda cuenta Auth. Detectó un marcador PASS final incondicional y señaló el límite de usar un UUID ajeno sin perfil real.
+
+Se movió el aviso PASS al interior del bloque, después de las comprobaciones, y se eliminó el SELECT incondicional. Se mantuvo explícito el límite de identidad simulada y se añadió cómo cerrar la transacción si un cliente interrumpe el lote por un error. La consulta revisada se volvió a ejecutar en Supabase SQL Editor. Esta revisión de IA no se presenta como una aprobación humana de PR.

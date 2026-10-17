@@ -11,6 +11,8 @@ Se verificó RLS habilitado en profiles, projects, tasks, task_statuses y priori
 
 El panel Authentication confirmó el registro, la confirmación de correo y el primer inicio de sesión de la cuenta institucional del autor. Esta observación no acredita todavía el flujo completo de CRUD desde esa sesión ni aislamiento entre dos usuarios cloud. Para este último existe `npm run test:rls`, con dos cuentas de prueba confirmadas y sus credenciales únicamente en `.env` local.
 
+Se ejecutó además `scripts/test-cloud-sql.sql` en SQL Editor: 10 comprobaciones aprobadas de CRUD, triggers, vista, aislamiento y cascada en PostgreSQL cloud. El rol cambia a `authenticated`, las identidades se simulan en SQL y la transacción se revierte completamente. No sustituye la prueba REST con dos JWT emitidos por Auth. Consulta y límites en [CUMPLIMIENTO.md](CUMPLIMIENTO.md).
+
 Origen local configurado: `http://127.0.0.1:5173`. Para publicar la aplicación se debe configurar el origen HTTPS del alojamiento en Auth y reconstruir con las variables públicas. El repositorio no proporciona un alojamiento web de producción.
 
 ## Looker Studio / Data Studio
